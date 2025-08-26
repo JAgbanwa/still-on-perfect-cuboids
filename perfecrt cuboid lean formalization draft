@@ -1,0 +1,460 @@
+-- filepath: /Users/jamalmac/Desktop/research PC Lean/lemmas.lean
+
+lemma lemma_2_1
+  (a b d₁ : ℤ)
+  (h : a^2 + b^2 = d₁^2) :
+  d₁ ∣ (a + b)^2 ∧ d₁ ∣ (a - b)^2 :=
+begin
+  -- Proof sketch:
+  -- (a + b)^2 = a^2 + 2ab + b^2 = d₁^2 + 2ab
+  -- (a - b)^2 = a^2 - 2ab + b^2 = d₁^2 - 2ab
+  -- So d₁ divides both expressions.
+  sorry
+end
+
+
+
+//Lemma 2.2
+
+lemma lemma_2_2
+  (a b c d₁ d₂ : ℤ)
+  (h₁ : a^2 + b^2 = d₁^2)
+  (h₂ : a^2 + c^2 = d₂^2) :
+  (int.gcd d₁ d₂) ∣ a :=
+begin
+  -- Proof sketch:
+  -- Both d₁ and d₂ are related to a, so their gcd divides a.
+  sorry
+end
+
+
+
+//Lemma 2.3
+
+lemma lemma_2_3
+  (a b c d₁ d₂ d₃ d₄ : ℤ)
+  (h₁ : a^2 + b^2 = d₁^2)
+  (h₂ : b^2 + c^2 = d₂^2)
+  (h₃ : c^2 + a^2 = d₃^2)
+  (h₄ : a^2 + b^2 + c^2 = d₄^2) :
+  ∃ k : ℤ, k ∣ a * b * c :=
+begin
+  /-
+  Proof sketch:
+  The system of equations implies that a, b, c share certain divisibility properties.
+  In particular, their product is divisible by a nontrivial integer k.
+  -/
+  sorry -- Fill in with the specific divisor argument from the paper.
+end
+
+
+//Lemma 2.4
+
+lemma lemma_2_4
+  (a b c d₁ d₂ d₃ d₄ : ℤ)
+  (h₁ : a^2 + b^2 = d₁^2)
+  (h₂ : b^2 + c^2 = d₂^2)
+  (h₃ : c^2 + a^2 = d₃^2)
+  (h₄ : a^2 + b^2 + c^2 = d₄^2) :
+  ¬ ∃ m : ℤ, m^2 ∣ a * b * c ∧ m^3 ∣ a * b * c :=
+begin
+  /-
+  Proof sketch:
+  The product a * b * c cannot simultaneously be divisible by both a square and a cube
+  in the way required by the system, leading to impossibility.
+  -/
+  sorry -- Fill in with the specific contradiction argument from the paper.
+end
+
+
+*****missing Lemma 2.6, will include in the next video.
+
+
+
+\\Lemma 2.7
+
+/--
+Lemma (No Perfect Cuboid with Prime Side $c$):
+
+Let $p$ be a prime. Then there exists no perfect cuboid where $c = p$.
+-/
+lemma no_perfect_cuboid_prime_c
+  (p : ℕ) (hp : nat.prime p) :
+  ¬ ∃ (a b d e f g : ℕ),
+    perfect_cuboid.mk a b p d e f g
+      (by {simp}) (by {simp}) (by {simp}) (by {simp}) (by {simp}) :=
+begin
+  -- Proof sketch:
+  -- Assume a perfect cuboid with c = p.
+  -- The face diagonal equation: a^2 + p^2 = f^2.
+  -- Two cases:
+  -- 1. p = 2mn: Only possible for p = 2, but leads to gcd(m, n) ≠ 1 or non-integer solutions.
+  -- 2. p = m^2 - n^2: Forces a = (p^2 - 1)/2 and f = (p^2 + 1)/2.
+  -- Considering g^2 = b^2 + p^2, parametric form for b leads to contradictions:
+  --   - Non-integer values for most divisors s
+  --   - Violations of ordering g > max(b, p) when s is minimal
+  -- Therefore, no perfect cuboid can have prime c.
+  sorry
+end
+
+
+
+//Lemma 2.5
+
+Lemma 2.5 (Template):
+
+Under the perfect cuboid equations, if a certain divisor condition holds for a, b, c,
+then a contradiction arises.
+-/
+lemma lemma_2_5 :
+  ¬ ∃ (a b c d₁ d₂ d₃ d₄ : ℕ),
+    a > 0 ∧ b > 0 ∧ c > 0 ∧
+    a^2 + b^2 = d₁^2 ∧
+    b^2 + c^2 = d₂^2 ∧
+    c^2 + a^2 = d₃^2 ∧
+    a^2 + b^2 + c^2 = d₄^2 ∧
+    ∃ (k : ℕ), k > 1 ∧ k ∣ a * b * c :=
+begin
+  -- The proof would show that the divisor condition cannot be satisfied
+  -- under the constraints of the perfect cuboid equations.
+  sorry
+end
+
+
+//Lemma 2.8
+
+/--
+Theorem (No Perfect Cuboid with Any Biprime Side):
+
+There exists no perfect cuboid where any of the sides a, b, or c is a product of two distinct primes.
+-/
+theorem no_perfect_cuboid_with_biprime_side :
+  ∀ (a b c : ℕ),
+    (∃ p q : ℕ, nat.prime p ∧ nat.prime q ∧ p ≠ q ∧ (a = p * q ∨ b = p * q ∨ c = p * q)) →
+    ¬ ∃ (d e f g : ℕ), perfect_cuboid.mk a b c d e f g
+      (by {simp}) (by {simp}) (by {simp}) (by {simp}) (by {simp}) :=
+begin
+  -- Proof: Follows from previous lemmas for biprime a, b, and c.
+  sorry
+end
+
+
+
+
+//Lemma 2.9
+
+/--
+Lemma (No Perfect Cuboid with Prime Side $b$):
+
+Let $p$ be a prime. Then there exists no perfect cuboid where $b = p$.
+-/
+lemma no_perfect_cuboid_prime_b
+  (p : ℕ) (hp : nat.prime p) :
+  ¬ ∃ (a c d e f g : ℕ),
+    perfect_cuboid.mk a p c d e f g
+      (by {simp}) (by {simp}) (by {simp}) (by {simp}) (by {simp}) :=
+begin
+  -- Proof sketch:
+  -- Assume a perfect cuboid with b = p.
+  -- Consider the Pythagorean triple (a, b, e):
+  -- Case 1: p = 2mn. Only possible for p = 2, but leads to contradictions (gcd or non-integer).
+  -- Case 2: p = m^2 - n^2. Only possible factorization is (1, p), so m = (p+1)/2, n = (p-1)/2.
+  -- This gives a = (p^2 - 1)/2, e = (p^2 + 1)/2.
+  -- For g^2 = p^2 + c^2, c must be (a^2 - r^2)/(2r) for some divisor r of a^2.
+  -- For all r, either c is non-integer or g ≤ c, violating geometric constraints.
+  -- Thus, no perfect cuboid can exist with prime b.
+  sorry
+end
+
+
+
+
+
+
+
+
+
+
+//Lemma 2.10
+
+/--
+Lemma (No Perfect Cuboid with Prime Side $c$):
+
+Let $p$ be a prime. Then there exists no perfect cuboid where $c = p$.
+-/
+lemma no_perfect_cuboid_prime_c
+  (p : ℕ) (hp : nat.prime p) :
+  ¬ ∃ (a b d e f g : ℕ),
+    perfect_cuboid.mk a b p d e f g
+      (by {simp}) (by {simp}) (by {simp}) (by {simp}) (by {simp}) :=
+begin
+  -- Proof sketch:
+  -- Assume a perfect cuboid with c = p.
+  -- Face diagonal: a^2 + p^2 = f^2.
+  -- Case 1: p = 2mn. Only possible for p = 2, but leads to gcd(m, n) ≠ 1 or non-integer solutions.
+  -- Case 2: p = m^2 - n^2. Forces a = (p^2 - 1)/2 and f = (p^2 + 1)/2.
+  -- For g^2 = b^2 + p^2, b = (a^2 - s^2)/(2s) for some divisor s of a^2.
+  -- For all s, either b is non-integer or g ≤ max(b, p), violating geometric constraints.
+  -- Therefore, no perfect cuboid can have prime c.
+  sorry
+end
+
+
+Theorem 2.11
+
+/--
+Theorem (No Perfect Cuboid with Any Prime Side):
+
+There exists no perfect cuboid where any of the sides a, b, or c is prime.
+-/
+theorem no_perfect_cuboid_with_prime_side :
+  ∀ (a b c : ℕ),
+    (nat.prime a ∨ nat.prime b ∨ nat.prime c) →
+    ¬ ∃ (d e f g : ℕ), perfect_cuboid.mk a b c d e f g
+      (by {simp}) (by {simp}) (by {simp}) (by {simp}) (by {simp}) :=
+begin
+  -- Proof: Follows from previous lemmas for prime a, b, and c.
+  sorry
+end
+
+
+//Lemma 2.12
+
+/--
+Lemma (Existence of Divisor Parametrization):
+
+For any perfect cuboid with sides (a, b, c) and diagonals (d, e, f, g),
+there exist positive integers r₂, r₃, r₄ such that:
+  (1) r₂ ∣ a^2, r₃ ∣ a^2, r₄ ∣ a^2
+  (2) 0 < r₄ < r₃ < r₂ < a
+  (3) b = (a^2 - r₂^2) / (2 * r₂),
+      c = (a^2 - r₃^2) / (2 * r₃),
+      g = (a^2 - r₄^2) / (2 * r₄)
+-/
+lemma divisor_parametrization_exists
+  (a b c d e f g : ℕ)
+  (cuboid : perfect_cuboid)
+  (ha : cuboid.a = a) (hb : cuboid.b = b) (hc : cuboid.c = c)
+  (hd : cuboid.d = d) (he : cuboid.e = e) (hf : cuboid.f = f) (hg : cuboid.g = g) :
+  ∃ (r₂ r₃ r₄ : ℕ),
+    r₂ ∣ a^2 ∧ r₃ ∣ a^2 ∧ r₄ ∣ a^2 ∧
+    0 < r₄ ∧ r₄ < r₃ ∧ r₃ < r₂ ∧ r₂ < a ∧
+    b = (a^2 - r₂^2) / (2 * r₂) ∧
+    c = (a^2 - r₃^2) / (2 * r₃) ∧
+    g = (a^2 - r₄^2) / (2 * r₄) :=
+begin
+  -- Part 1: Establish parametric forms using face diagonal equations and factorization.
+  -- Part 2: Show divisor ordering using monotonicity and geometric constraints.
+  -- Part 3: Verify all constraints as in the table.
+  sorry
+end
+
+
+//Theorem 2.13
+
+/--
+Theorem (No Perfect Cuboid with Composite Side):
+
+Let a = p₁^k₁ * p₂^k₂ * ... * pₘ^kₘ > 1 be any positive integer with prime factorization.
+Then there exists no perfect cuboid with side length a.
+-/
+theorem no_perfect_cuboid_with_composite_side
+  (a : ℕ) (h_a : a > 1) :
+  ¬ ∃ (b c d e f g : ℕ),
+    -- Parametric representation for b, c, g
+    ∃ (r₂ r₃ r₄ : ℕ),
+      r₂ ∣ a^2 ∧ r₃ ∣ a^2 ∧ r₄ ∣ a^2 ∧
+      0 < r₄ ∧ r₄ < r₃ ∧ r₃ < r₂ ∧ r₂ < a ∧
+      b = (a^2 - r₂^2) / (2 * r₂) ∧
+      c = (a^2 - r₃^2) / (2 * r₃) ∧
+      g = (a^2 - r₄^2) / (2 * r₄) ∧
+      -- Cuboid equations
+      b^2 + c^2 = g^2 :=
+begin
+  -- Proof by contradiction:
+  -- Assume such a cuboid exists, then by divisor-based parametrization,
+  -- the equation b^2 + c^2 = g^2 leads to
+  --   r₃^2 r₄^2 (a^2 - r₂^2)^2 + r₂^2 r₄^2 (a^2 - r₃^2)^2 = r₂^2 r₃^2 (a^2 - r₄^2)^2
+  -- Expanding and rearranging, the sum of terms cannot be zero under the ordering 0 < r₄ < r₃ < r₂ < a.
+  -- This creates a contradiction, so no such cuboid exists.
+  sorry
+end
+
+
+
+
+//Full formalization of PC proof suggested by Copilot.
+
+-- filepath: /Users/jamalmac/Desktop/research PC Lean/lean_cuboid_proof.lean
+
+/-
+Perfect Cuboid: Full Formalization Template
+Author: [Your Name]
+-/
+
+import data.nat.prime
+import data.nat.gcd
+import algebra.group_power
+
+/-- A perfect cuboid is a rectangular box with integer sides a, b, c and integer diagonals d, e, f, g. -/
+structure perfect_cuboid :=
+(a b c d e f g : ℕ)
+(h_space : a^2 + b^2 + c^2 = d^2)
+(h_face1 : a^2 + b^2 = e^2)
+(h_face2 : a^2 + c^2 = f^2)
+(h_face3 : b^2 + c^2 = g^2)
+(h_pos : 0 < a ∧ 0 < b ∧ 0 < c)
+
+/-- Parametric forms for sides and diagonals using divisors of a^2. -/
+def b_param (a r : ℕ) := (a^2 - r^2) / (2 * r)
+def c_param (a s : ℕ) := (a^2 - s^2) / (2 * s)
+def g_param (a t : ℕ) := (a^2 - t^2) / (2 * t)
+
+/-- Divisor-based parametrization lemma. -/
+lemma divisor_parametrization
+  (C : perfect_cuboid) :
+  ∃ (r₂ r₃ r₄ : ℕ),
+    r₂ ∣ C.a^2 ∧ r₃ ∣ C.a^2 ∧ r₄ ∣ C.a^2 ∧
+    0 < r₄ ∧ r₄ < r₃ ∧ r₃ < r₂ ∧ r₂ < C.a ∧
+    C.b = b_param C.a r₂ ∧
+    C.c = c_param C.a r₃ ∧
+    C.g = g_param C.a r₄ :=
+begin
+  -- Fill: Use divisor structure and parametrization from your paper.
+  sorry
+end
+
+/-- Strict divisor ordering lemma. -/
+lemma strict_divisor_ordering
+  (C : perfect_cuboid)
+  (r₂ r₃ r₄ : ℕ)
+  (h : r₂ ∣ C.a^2 ∧ r₃ ∣ C.a^2 ∧ r₄ ∣ C.a^2 ∧
+      0 < r₄ ∧ r₄ < r₃ ∧ r₃ < r₂ ∧ r₂ < C.a) :
+  r₄ < r₃ ∧ r₃ < r₂ :=
+begin
+  -- Fill: Use geometric constraints and Lemma 2.1 from your paper.
+  exact ⟨h.5, h.6⟩,
+end
+
+/-- Parametrization completeness lemma (Pythagorean triple form). -/
+lemma parametrization_completeness
+  (C : perfect_cuboid) :
+  ∃ (R₂ R₃ R₄ m₁ m₂ m₃ n : ℕ),
+    n = 1 ∧ R₄ < R₃ ∧ R₃ < R₂ ∧
+    R₂ ∣ C.a^2 ∧ R₃ ∣ C.a^2 ∧ R₄ ∣ C.a^2 ∧
+    C.b = R₂ * (m₁^2 - n^2) ∧ C.e = R₂ * (m₁^2 + n^2) ∧
+    C.c = R₃ * (m₂^2 - n^2) ∧ C.f = R₃ * (m₂^2 + n^2) ∧
+    C.g = R₄ * (m₃^2 - n^2) ∧ C.d = R₄ * (m₃^2 + n^2) :=
+begin
+  -- Fill: Use Pythagorean triple parametrization and divisor constraints.
+  sorry
+end
+
+/-- Main algebraic inconsistency lemma: b^2 + c^2 ≠ g^2 under divisor ordering. -/
+lemma cuboid_face_diagonal_inconsistency
+  (R₂ R₃ R₄ m₁ m₂ m₃ : ℕ)
+  (hR : 0 < R₄ ∧ R₄ < R₃ ∧ R₃ < R₂)
+  (hm : 1 < m₁ ∧ 1 < m₂ ∧ 1 < m₃) :
+  let b := R₂ * (m₁^2 - 1),
+      c := R₃ * (m₂^2 - 1),
+      g := R₄ * (m₃^2 - 1) in
+  b^2 + c^2 ≠ g^2 :=
+begin
+  -- Fill: Expand both sides, use sign analysis as in your paper.
+  sorry
+end
+
+/-- Impossibility for prime side a. -/
+lemma no_perfect_cuboid_prime_a
+  (p : ℕ) (hp : nat.prime p) :
+  ¬ ∃ (b c d e f g : ℕ), perfect_cuboid.mk p b c d e f g
+    (by {simp}) (by {simp}) (by {simp}) (by {simp}) (by {simp}) :=
+begin
+  -- Fill: Use factorization and parametrization for prime a, show contradiction.
+  sorry
+end
+
+/-- Impossibility for biprime side a. -/
+lemma no_perfect_cuboid_biprime_a
+  (p q : ℕ) (hp : nat.prime p) (hq : nat.prime q) (hpq : p ≠ q) :
+  let a := p * q in
+  ¬ ∃ (b c d e f g : ℕ), perfect_cuboid.mk a b c d e f g
+    (by {simp}) (by {simp}) (by {simp}) (by {simp}) (by {simp}) :=
+begin
+  -- Fill: Use divisor structure for biprime a, show contradiction.
+  sorry
+end
+
+/-- Impossibility for composite side a. -/
+theorem no_perfect_cuboid_with_composite_side
+  (a : ℕ) (h_a : a > 1) :
+  ¬ ∃ (b c g : ℕ) (r₂ r₃ r₄ : ℕ),
+    r₂ ∣ a^2 ∧ r₃ ∣ a^2 ∧ r₄ ∣ a^2 ∧
+    0 < r₄ ∧ r₄ < r₃ ∧ r₃ < r₂ ∧ r₂ < a ∧
+    b = (a^2 - r₂^2) / (2 * r₂) ∧
+    c = (a^2 - r₃^2) / (2 * r₃) ∧
+    g = (a^2 - r₄^2) / (2 * r₄) ∧
+    b^2 + c^2 = g^2 :=
+begin
+  -- Fill: Expand, rearrange, and use sign analysis for contradiction.
+  sorry
+end
+
+/-- Impossibility for prime or biprime side b or c (symmetric cases). -/
+lemma no_perfect_cuboid_prime_biprime_bc
+  (x : ℕ) (hx : nat.prime x ∨ ∃ p q : ℕ, nat.prime p ∧ nat.prime q ∧ p ≠ q ∧ x = p * q) :
+  ¬ ∃ (a c d e f g : ℕ), perfect_cuboid.mk a x c d e f g
+    (by {simp}) (by {simp}) (by {simp}) (by {simp}) (by {simp}) :=
+begin
+  -- Fill: Use analogous arguments for b and c.
+  sorry
+end
+
+/-- Universal divisor-ordering constraint theorem. -/
+theorem universal_divisor_ordering_constraint
+  (C : perfect_cuboid) :
+  ∃ (r₂ r₃ r₄ : ℕ), r₂ ∣ C.a^2 ∧ r₃ ∣ C.a^2 ∧ r₄ ∣ C.a^2 ∧
+    0 < r₄ ∧ r₄ < r₃ ∧ r₃ < r₂ ∧ r₂ < C.a :=
+begin
+  -- Fill: Use geometric and algebraic constraints.
+  sorry
+end
+
+/-- Main theorem: No perfect cuboid exists with any prime, biprime, or composite side. -/
+theorem no_perfect_cuboid_exists :
+  ∀ (a b c : ℕ),
+    (nat.prime a ∨ nat.prime b ∨ nat.prime c ∨
+    (∃ p q, nat.prime p ∧ nat.prime q ∧ p ≠ q ∧ (a = p * q ∨ b = p * q ∨ c = p * q)) ∨
+    (a > 1 ∨ b > 1 ∨ c > 1)) →
+    ¬ ∃ (d e f g : ℕ), perfect_cuboid.mk a b c d e f g
+      (by {simp}) (by {simp}) (by {simp}) (by {simp}) (by {simp}) :=
+begin
+  -- Fill: Combine all previous lemmas and theorems.
+  sorry
+end
+
+/-- Definition: A perfect cuboid must satisfy the divisor-based parametrization and strict ordering. -/
+def is_valid_cuboid_parametrization
+  (a b c d e f g : ℕ) : Prop :=
+  ∃ (r₂ r₃ r₄ : ℕ),
+    r₂ ∣ a^2 ∧ r₃ ∣ a^2 ∧ r₄ ∣ a^2 ∧
+    0 < r₄ ∧ r₄ < r₃ ∧ r₃ < r₂ ∧ r₂ < a ∧
+    b = b_param a r₂ ∧
+    c = c_param a r₃ ∧
+    g = g_param a r₄
+
+/-- Main conclusion: No perfect cuboid exists with prime, biprime, or composite sides, and divisor ordering is necessary for any candidate. -/
+theorem main_conclusion :
+  ∀ (a b c d e f g : ℕ),
+    (nat.prime a ∨ nat.prime b ∨ nat.prime c ∨
+    (∃ p q, nat.prime p ∧ nat.prime q ∧ p ≠ q ∧ (a = p * q ∨ b = p * q ∨ c = p * q)) ∨
+    (a > 1 ∨ b > 1 ∨ c > 1)) →
+    ¬ is_valid_cuboid_parametrization a b c d e f g :=
+begin
+  -- Fill: Use all previous results.
+  sorry
+end
+
+
+*work in progress*
+
